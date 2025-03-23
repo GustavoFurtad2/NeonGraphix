@@ -13,9 +13,11 @@ function Render.new(width, height)
         backgroundColor = Color3.new(0, 0, 0),
 
         componentsBuffer = {
-            rectangles = {}
+            pixels = {},
+            rectangles = {},
         },
 
+        currentPixelIndex = 0,
         currentRectangleIndex = 0
     }
 
@@ -49,6 +51,33 @@ end
 function Render:getGui()
 
     return self.screenGui
+end
+
+function Render:drawPixel(x, y, color)
+
+    self.currentPixelIndex += 1
+
+    local pixel
+
+    if self.currentPixelIndex > #self.componentsBuffer.pixels then
+        pixel = Instance.new("Frame")
+        table.insert(self.componentsBuffer.pixels, pixel)
+    end
+
+    pixel = self.componentsBuffer.pixels[self.currentPixelIndex]
+    pixel.Parent = self.screenGui
+
+    local xScale = x / self.width
+    local yScale = y / self.height
+    local widthScale = 1 / self.width
+    local heightScale = 1 / self.height
+
+    pixel.Position = UDim2.new(xScale, 0, yScale, 0)
+    pixel.Size = UDim2.new(widthScale, 0, heightScale, 0)
+    pixel.Transparency = 1
+    pixel.BackgroundColor3 = color
+
+    return pixel
 end
 
 function Render:drawRectangle(x, y, width, height, color)
@@ -90,6 +119,11 @@ function Render:clear()
 
         component.Transparency = 1
     end
+
+    for index, component in next, self.componentsBuffer.pixels do
+
+        component.Transparency = 1
+    end
 end
 
 function Render:update()
@@ -101,6 +135,12 @@ function Render:update()
         component.Transparency = 0
     end
 
+    for index, component in next, self.componentsBuffer.pixels do
+
+        component.Transparency = 0
+    end
+
+    self.currentPixelIndex = 0
     self.currentRectangleIndex = 0
 
     wait()
