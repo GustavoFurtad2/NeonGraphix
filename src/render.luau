@@ -80,6 +80,37 @@ function Render:drawPixel(x, y, color)
     return pixel
 end
 
+function Render:drawCircle(x, y, radius, fill, color)
+
+    local xStart = math.floor(x - radius)
+    local xEnd = math.floor(x + radius)
+    local yStart = math.floor(y - radius)
+    local yEnd = math.floor(y + radius)
+
+    for i = xStart, xEnd do
+
+        for j = yStart, yEnd do
+
+            local dx = i - x
+            local dy = j - y
+            local distanceSquared = dx * dx + dy * dy
+
+            if distanceSquared <= radius * radius then
+
+                if fill then
+
+                    self:drawPixel(math.floor(i), math.floor(j), color)
+                else
+
+                    if distanceSquared >= (radius - 1) * (radius - 1) then
+                        self:drawPixel(math.floor(i), math.floor(j), color)
+                    end
+                end
+            end
+        end
+    end
+end
+
 function Render:drawRectangle(x, y, width, height, color)
     
     self.currentRectangleIndex += 1
