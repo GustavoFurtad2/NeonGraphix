@@ -111,6 +111,50 @@ function Render:drawCircle(x, y, radius, fill, color)
     end
 end
 
+function Render:drawLine(x1, y1, x2, y2, thickness, color)
+
+    local dx = math.abs(x2 - x1)
+    local dy = math.abs(y2 - y1)
+
+    local sx = (x1 < x2) and 1 or -1
+    local sy = (y1 < y2) and 1 or -1
+
+    local err = dx - dy
+
+    local halfThickness = math.floor(thickness / 2)
+
+    while true do
+
+        for tx = -halfThickness, halfThickness do
+
+            for ty = -halfThickness, halfThickness do
+                
+                local px, py = x1 + tx, y1 + ty
+
+                if px >= 0 and px < self.width and py >= 0 and py < self.height then
+                    self:drawPixel(px, py, color)
+                end
+            end
+        end
+
+        if x1 == x2 and y1 == y2 then 
+            break
+        end
+
+        local e2 = 2 * err
+
+        if e2 > -dy then
+            err = err - dy
+            x1 = x1 + sx
+        end
+
+        if e2 < dx then
+            err = err + dx
+            y1 = y1 + sy
+        end
+    end
+end
+
 function Render:drawRectangle(x, y, width, height, color)
     
     self.currentRectangleIndex += 1
