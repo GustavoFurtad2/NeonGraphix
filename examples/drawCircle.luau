@@ -4,6 +4,8 @@ local SCREEN_WIDTH, SCREEN_HEIGHT = 320, 248
 
 local render = NeonGraphix.Renderer.new(SCREEN_WIDTH, SCREEN_HEIGHT)
 
+render:init(game.Players.LocalPlayer)
+
 game:GetService("RunService").RenderStepped:Connect(function()
 	
 	render:clear()
