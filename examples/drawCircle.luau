@@ -1,5 +1,9 @@
 local NeonGraphix = require(game.ReplicatedStorage.NeonGraphix.neonGraphix)
 
+local SCREEN_WIDTH, SCREEN_HEIGHT = 320, 248
+
+local render = NeonGraphix.Renderer.new(SCREEN_WIDTH, SCREEN_HEIGHT)
+
 game:GetService("RunService").RenderStepped:Connect(function()
 	
 	render:clear()
