@@ -1,14 +1,17 @@
-local Render = {}
-Render.__index = Render
+local Render2D = {}
+Render2D.__index = Render2D
 
-function Render.new(width, height)
+function Render2D.new(resolutionWidth, resolutionHeight, windowWidth, windowHeight)
 
     local self = {
 
         player,
 
-        width = width,
-        height = height,
+        resolutionWidth = resolutionWidth,
+        resolutionHeight = resolutionHeight,
+
+        windowWidth = windowWidth,
+        windowHeight = windowHeight,
 
         backgroundColor = Color3.new(0, 0, 0),
 
@@ -21,10 +24,10 @@ function Render.new(width, height)
         currentRectangleIndex = 0
     }
 
-    return setmetatable(self, Render)
+    return setmetatable(self, Render2D)
 end
 
-function Render:init(player)
+function Render2D:init(player)
 
     self.player = player
     
@@ -34,26 +37,26 @@ function Render:init(player)
     self.backgroundFrame = Instance.new("Frame")
     self.backgroundFrame.BackgroundColor3 = self.backgroundColor
     self.backgroundFrame.Position = UDim2.new(0, 0, 0, 0)
-    self.backgroundFrame.Size = UDim2.new(1, 0, 1, 0)
+    self.backgroundFrame.Size = UDim2.new(self.windowWidth, 0, self.windowHeight, 0)
     self.backgroundFrame.Parent = self.screenGui
 end
 
-function Render:setResolution(width, height)
+function Render2D:setResolution(width, height)
 
     self.width, self.height = width, height
 end
 
-function Render:getResolution()
+function Render2D:getResolution()
 
     return self.width, self.height
 end
 
-function Render:getGui()
+function Render2D:getGui()
 
     return self.screenGui
 end
 
-function Render:drawPixel(x, y, color)
+function Render2D:drawPixel(x, y, color)
 
     self.currentPixelIndex += 1
 
@@ -67,10 +70,10 @@ function Render:drawPixel(x, y, color)
     pixel = self.componentsBuffer.pixels[self.currentPixelIndex]
     pixel.Parent = self.screenGui
 
-    local xScale = x / self.width
-    local yScale = y / self.height
-    local widthScale = 1 / self.width
-    local heightScale = 1 / self.height
+    local xScale = x / self.resolutionWidth
+    local yScale = y / self.resolutionHeight
+    local widthScale = self.windowWidth / self.resolutionWidth
+    local heightScale = self.windowHeight / self.resolutionHeight
 
     pixel.Position = UDim2.new(xScale, 0, yScale, 0)
     pixel.Size = UDim2.new(widthScale, 0, heightScale, 0)
@@ -80,7 +83,7 @@ function Render:drawPixel(x, y, color)
     return pixel
 end
 
-function Render:drawCircle(x, y, radius, fill, color)
+function Render2D:drawCircle(x, y, radius, fill, color)
 
     local xStart = math.floor(x - radius)
     local xEnd = math.floor(x + radius)
@@ -111,7 +114,7 @@ function Render:drawCircle(x, y, radius, fill, color)
     end
 end
 
-function Render:drawLine(x1, y1, x2, y2, thickness, color)
+function Render2D:drawLine(x1, y1, x2, y2, thickness, color)
 
     local dx = math.abs(x2 - x1)
     local dy = math.abs(y2 - y1)
@@ -155,7 +158,7 @@ function Render:drawLine(x1, y1, x2, y2, thickness, color)
     end
 end
 
-function Render:drawRectangle(x, y, width, height, color)
+function Render2D:drawRectangle(x, y, width, height, color)
     
     self.currentRectangleIndex += 1
 
@@ -169,13 +172,13 @@ function Render:drawRectangle(x, y, width, height, color)
     rectangle = self.componentsBuffer.rectangles[self.currentRectangleIndex]
     rectangle.Parent = self.screenGui
     
-    local xScale = x / self.width
-    local yScale = y / self.height
-    local widthScale = width / self.width
-    local heightScale = height / self.height
+    local xScale = x / self.resolutionWidth
+    local yScale = y / self.resolutionHeight
+    local widthScale = width / self.resolutionWidth
+    local heightScale = height / self.resolutionHeight
 
-    rectangle.Position = UDim2.new(xScale, 0, yScale, 0)
-    rectangle.Size = UDim2.new(widthScale, 0, heightScale, 0)
+    rectangle.Position = UDim2.new(xScale * self.windowWidth, 0, yScale * self.windowHeight, 0)
+    rectangle.Size = UDim2.new(widthScale * self.windowWidth, 0, heightScale * self.windowHeight, 0)
     rectangle.Transparency = 1
     rectangle.BackgroundColor3 = color
 
@@ -183,12 +186,12 @@ function Render:drawRectangle(x, y, width, height, color)
 end
 
 
-function Render:setBackgroundColor(color)
+function Render2D:setBackgroundColor(color)
 
     self.backgroundColor = color
 end
 
-function Render:clear()
+function Render2D:clear()
 
     for index, component in next, self.componentsBuffer.rectangles do
 
@@ -201,7 +204,7 @@ function Render:clear()
     end
 end
 
-function Render:update()
+function Render2D:update()
 
     self.backgroundFrame.BackgroundColor3 = self.backgroundColor
 
@@ -221,4 +224,4 @@ function Render:update()
     wait()
 end
 
-return Render
+return Render2D

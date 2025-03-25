@@ -17,15 +17,19 @@ local NeonGraphix = require(game.ReplicatedStorage.NeonGraphix.neonGraphix)
 <h3>NeonGraphix.Renderer.new</h3>
 
 method to create a new renderer, returns a new render object.
-| Parameter | Data Type |
-| --------- | --------- |
-| Width     | Number    |
-| Height    | Number    |
+| Parameter | Data Type            |
+| --------- | -------------------- |
+| Resolution Width     | Number    |
+| Resolution Height    | Number    |
+| Window Width         | Number    |
+| Window Height        | Number    |
 
 usage example:
 ```lua
-local render = NeonGraphix.Renderer.new(320, 248)                   
-```
+local render = NeonGraphix.Renderer.new(320, 248, 1, 1)             
+ ```
+note: the window size is scaled, i.e. 1 is the same as 100%
+
 </td>
 </table>
 <table>
