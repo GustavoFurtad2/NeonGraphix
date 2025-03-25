@@ -2,7 +2,7 @@ local NeonGraphix = require(game.ReplicatedStorage.NeonGraphix.neonGraphix)
 
 local RESOLUTION_WIDTH, RESOLUTION_HEIGHT = 320, 248
 
-local render = NeonGraphix.Renderer.new(RESOLUTION_WIDTH, RESOLUTION_HEIGHT, 1, 1)
+local render = NeonGraphix.Renderer2D.new(RESOLUTION_WIDTH, RESOLUTION_HEIGHT, 1, 1)
 
 render:init(game.Players.LocalPlayer)
 
