@@ -1,7 +1,7 @@
 local Render2D = {}
 Render2D.__index = Render2D
 
-function Render2D.new(resolutionWidth, resolutionHeight, windowWidth, windowHeight)
+function Render2D.new(resolutionWidth, resolutionHeight, windowX, windowY, windowWidth, windowHeight)
 
     local self = {
 
@@ -9,6 +9,9 @@ function Render2D.new(resolutionWidth, resolutionHeight, windowWidth, windowHeig
 
         resolutionWidth = resolutionWidth,
         resolutionHeight = resolutionHeight,
+
+        windowX = windowX,
+        windowY = windowY,
 
         windowWidth = windowWidth,
         windowHeight = windowHeight,
@@ -36,7 +39,7 @@ function Render2D:init(player)
 
     self.backgroundFrame = Instance.new("Frame")
     self.backgroundFrame.BackgroundColor3 = self.backgroundColor
-    self.backgroundFrame.Position = UDim2.new(0, 0, 0, 0)
+    self.backgroundFrame.Position = UDim2.new(self.windowX, 0, self.windowY, 0)
     self.backgroundFrame.Size = UDim2.new(self.windowWidth, 0, self.windowHeight, 0)
     self.backgroundFrame.Parent = self.screenGui
 end
@@ -75,7 +78,7 @@ function Render2D:drawPixel(x, y, color)
     local widthScale = self.windowWidth / self.resolutionWidth
     local heightScale = self.windowHeight / self.resolutionHeight
 
-    pixel.Position = UDim2.new(xScale, 0, yScale, 0)
+    pixel.Position = UDim2.new(xScale + self.windowX, 0, yScale + self.windowY, 0)
     pixel.Size = UDim2.new(widthScale, 0, heightScale, 0)
     pixel.Transparency = 1
     pixel.BackgroundColor3 = color
@@ -102,11 +105,11 @@ function Render2D:drawCircle(x, y, radius, fill, color)
 
                 if fill then
 
-                    self:drawPixel(math.floor(i), math.floor(j), color)
+                    self:drawPixel(math.floor(i) + self.windowX, math.floor(j) + self.windowY, color)
                 else
 
                     if distanceSquared >= (radius - 1) * (radius - 1) then
-                        self:drawPixel(math.floor(i), math.floor(j), color)
+                        self:drawPixel(math.floor(i) + self.windowX, math.floor(j) + self.windowY, color)
                     end
                 end
             end
@@ -134,8 +137,8 @@ function Render2D:drawLine(x1, y1, x2, y2, thickness, color)
                 
                 local px, py = x1 + tx, y1 + ty
 
-                if px >= 0 and px < self.width and py >= 0 and py < self.height then
-                    self:drawPixel(px, py, color)
+                if px >= 0 and px < self.resolutionWidth and py >= 0 and py < self.resolutionHeight then
+                    self:drawPixel(px + self.windowX, py + self.windowY, color)
                 end
             end
         end
@@ -177,7 +180,7 @@ function Render2D:drawRectangle(x, y, width, height, color)
     local widthScale = width / self.resolutionWidth
     local heightScale = height / self.resolutionHeight
 
-    rectangle.Position = UDim2.new(xScale * self.windowWidth, 0, yScale * self.windowHeight, 0)
+    rectangle.Position = UDim2.new((xScale * self.windowWidth) + self.windowX, 0, (yScale * self.windowHeight) + self.windowY, 0)
     rectangle.Size = UDim2.new(widthScale * self.windowWidth, 0, heightScale * self.windowHeight, 0)
     rectangle.Transparency = 1
     rectangle.BackgroundColor3 = color

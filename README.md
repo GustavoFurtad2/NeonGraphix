@@ -21,6 +21,8 @@ method to create a new renderer, returns a new render object.
 | --------- | -------------------- |
 | Resolution Width     | Number    |
 | Resolution Height    | Number    |
+| Window X             | Number    |
+| Window Y             | Number    |
 | Window Width         | Number    |
 | Window Height        | Number    |
 
