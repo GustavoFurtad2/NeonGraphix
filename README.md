@@ -28,7 +28,7 @@ method to create a new renderer, returns a new render object.
 
 usage example:
 ```lua
-local render = NeonGraphix.Renderer.new(320, 248, 0, 0, 1, 1)             
+local render = NeonGraphix.Renderer.new(320, 248, 0, 0, 1, 1)       
  ```
 note: the window size is scaled, i.e. 1 is the same as 100%
 
