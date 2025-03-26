@@ -55,9 +55,13 @@ render:init(game.Players.LocalPlayer)
 
 clears the render buffer.
 
+| Parameter           | Data Type |
+| ------------------- | --------- |
+| BackgroundColor     | Number    |
+
 usage example:
 ```lua
-render:clear()                                                      
+render:clear(Color3.new(0, 0, 0))                                   
 ```
 </td>
 </table>
@@ -70,21 +74,6 @@ updates rendering, reusing objects in the buffer<BR> to optimize performance.
 usage example:
 ```lua
 render:update()                                                     
-```
-</td>
-</table>
-<table>
-<td>
-<h3>:setBackgroundColor</h3>
-
-set the render background color.
-| Parameter | Data Type       |
-| --------- | --------------- |
-| Color     | Color3 Object    |
-
-usage example:
-```lua
-render:setBackgroundColor(Color3.new(0, 0, 1))                      
 ```
 </td>
 </table>
@@ -141,7 +130,7 @@ draw a pixel.
 | --------- | ------------- |
 | X         | Number        |
 | Y         | Number        |
-| Color     | Color Object  |
+| Color     | Color3 Object |
 
 usage example:
 ```lua
@@ -161,7 +150,7 @@ draw a line.
 | X2         | Number        |
 | Y2         | Number        |
 | Thickness  | Number        |
-| Color      | Color Object  |
+| Color      | Color3 Object |
 
 usage example:
 ```lua
@@ -180,7 +169,7 @@ draw a rectangle.
 | Y          | Number        |
 | width      | Number        |
 | height     | Number        |
-| Color      | Color Object  |
+| Color      | Color3 Object |
 
 usage example:
 ```lua
@@ -199,7 +188,7 @@ draw a circle.
 | Y          | Number        |
 | Radius     | Number        |
 | Fill       | Number        |
-| Color      | Color Object  |
+| Color      | Color3 Object |
 
 note: if fill is true the circle will be filled
 

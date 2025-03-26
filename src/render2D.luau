@@ -188,13 +188,9 @@ function Render2D:drawRectangle(x, y, width, height, color)
     return rectangle
 end
 
-
-function Render2D:setBackgroundColor(color)
+function Render2D:clear(color)
 
     self.backgroundColor = color
-end
-
-function Render2D:clear()
 
     for index, component in next, self.componentsBuffer.rectangles do
 
