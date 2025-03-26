@@ -14,7 +14,7 @@ local NeonGraphix = require(game.ReplicatedStorage.NeonGraphix.neonGraphix)
 
 <table>
 <td>
-<h3>NeonGraphix.Renderer.new</h3>
+<h3>NeonGraphix.Renderer2D.new</h3>
 
 method to create a new renderer, returns a new render object.
 | Parameter | Data Type            |
@@ -28,7 +28,7 @@ method to create a new renderer, returns a new render object.
 
 usage example:
 ```lua
-local render = NeonGraphix.Renderer.new(320, 248, 0, 0, 1, 1)       
+local render = NeonGraphix.Renderer2D.new(320, 248, 0, 0, 1, 1)     
  ```
 note: the window size is scaled, i.e. 1 is the same as 100%
 
@@ -36,7 +36,7 @@ note: the window size is scaled, i.e. 1 is the same as 100%
 </table>
 <table>
 <td>
-<h3>NeonGraphix.Renderer.init</h3>
+<h3>:init</h3>
 
 starts the renderer for a player
 | Parameter | Data Type      |
@@ -51,7 +51,7 @@ render:init(game.Players.LocalPlayer)
 </table>
 <table>
 <td>
-<h3>NeonGraphix.Renderer.clear</h3>
+<h3>:clear</h3>
 
 clears the render buffer.
 
@@ -63,7 +63,7 @@ render:clear()
 </table>
 <table>
 <td>
-<h3>NeonGraphix.Renderer.update</h3>
+<h3>:update</h3>
 
 updates rendering, reusing objects in the buffer<BR> to optimize performance.
 
@@ -75,7 +75,7 @@ render:update()
 </table>
 <table>
 <td>
-<h3>NeonGraphix.Renderer.setBackgroundColor</h3>
+<h3>:setBackgroundColor</h3>
 
 set the render background color.
 | Parameter | Data Type       |
@@ -90,7 +90,7 @@ render:setBackgroundColor(Color3.new(0, 0, 1))
 </table>
 <table>
 <td>
-<h3>NeonGraphix.Renderer.setResolution</h3>
+<h3>:setResolution</h3>
 
 set the render resolution.
 | Parameter | Data Type |
@@ -106,7 +106,7 @@ render:setResolution(320, 448)
 </table>
 <table>
 <td>
-<h3>NeonGraphix.Renderer.getResolution</h3>
+<h3>:getResolution</h3>
 
 get render resolution.
 
@@ -120,7 +120,7 @@ render:getResolution()
 </table>
 <table>
 <td>
-<h3>NeonGraphix.Renderer.getGui</h3>
+<h3>:getGui</h3>
 
 get render gui.
 
@@ -134,7 +134,7 @@ render:getGui()
 </table>
 <table>
 <td>
-<h3>NeonGraphix.Renderer.drawPixel</h3>
+<h3>:drawPixel</h3>
 
 draw a pixel.
 | Parameter | Data Type     |
@@ -151,7 +151,7 @@ render:drawPixel(10, 10, Color3.new(1, 0, 0))
 </table>
 <table>
 <td>
-<h3>NeonGraphix.Renderer.drawLine</h3>
+<h3>:drawLine</h3>
 
 draw a line.
 | Parameter  | Data Type     |
@@ -171,7 +171,7 @@ render:drawLine(1, 1, 10, 10, 1, Color3.new(1, 0, 0))
 </table>
 <table>
 <td>
-<h3>NeonGraphix.Renderer.drawRectangle</h3>
+<h3>:drawRectangle</h3>
 
 draw a rectangle.
 | Parameter  | Data Type     |
@@ -190,7 +190,7 @@ render:drawRectangle(1, 1, 10, 10, Color3.new(1, 0, 0))
 </table>
 <table>
 <td>
-<h3>NeonGraphix.Renderer.drawCircle</h3>
+<h3>:drawCircle</h3>
 
 draw a circle.
 | Parameter  | Data Type     |
