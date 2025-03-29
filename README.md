@@ -19,16 +19,17 @@ local NeonGraphix = require(game.ReplicatedStorage.NeonGraphix.neonGraphix)
 method to create a new renderer, returns a new render object.
 | Parameter | Data Type            |
 | --------- | -------------------- |
-| Resolution Width     | Number    |
-| Resolution Height    | Number    |
-| Window X             | Number    |
-| Window Y             | Number    |
-| Window Width         | Number    |
-| Window Height        | Number    |
+| Resolution      | Vector2    |
+| Window Position | Vector2    |
+| Window Size     | Vector2    |
 
 usage example:
 ```lua
-local render = NeonGraphix.Renderer2D.new(320, 248, 0, 0, 1, 1)     
+local render = NeonGraphix.Renderer2D.new(
+ Vector2.new(320, 248),
+ Vector2.new(0, 0),
+ Vector2.new(1, 1)
+)                                                                   
  ```
 note: the window size is scaled, i.e. 1 is the same as 100%
 
@@ -84,12 +85,11 @@ render:update()
 set the render resolution.
 | Parameter | Data Type |
 | --------- | --------- |
-| Width     | Number    |
-| Height    | Number    |
+| Resolution| Vector2    |
 
 usage example:
 ```lua
-render:setResolution(320, 448)                                      
+render:setResolution(Vector2.new(328, 248))                         
 ```
 </td>
 </table>
@@ -99,7 +99,7 @@ render:setResolution(320, 448)
 
 get render resolution.
 
-returns two values: width and height.
+returns a vector with the render resolution.
 
 usage example:
 ```lua
@@ -128,13 +128,12 @@ render:getGui()
 draw a pixel.
 | Parameter | Data Type     |
 | --------- | ------------- |
-| X         | Number        |
-| Y         | Number        |
+| Position  | Vector2       |
 | Color     | Color3 Object |
 
 usage example:
 ```lua
-render:drawPixel(10, 10, Color3.new(1, 0, 0))                       
+render:drawPixel(Vector2.new(10, 10), Color3.new(1, 0, 0))          
 ```
 </td>
 </table>
@@ -145,16 +144,18 @@ render:drawPixel(10, 10, Color3.new(1, 0, 0))
 draw a line.
 | Parameter  | Data Type     |
 | ---------- | ------------- |
-| X1         | Number        |
-| Y1         | Number        |
-| X2         | Number        |
-| Y2         | Number        |
+| Position 1 | Vector2       |
+| Position 2 | Vector2       |
 | Thickness  | Number        |
 | Color      | Color3 Object |
 
 usage example:
 ```lua
-render:drawLine(1, 1, 10, 10, 1, Color3.new(1, 0, 0))               
+render:drawLine(
+  Vector2.new(1, 1)
+  Vector2.new(320, 248),
+  1, Color3.new(1, 0, 0)
+)                                                                   
 ```
 </td>
 </table>
@@ -165,15 +166,17 @@ render:drawLine(1, 1, 10, 10, 1, Color3.new(1, 0, 0))
 draw a rectangle.
 | Parameter  | Data Type     |
 | ---------- | ------------- |
-| X          | Number        |
-| Y          | Number        |
-| width      | Number        |
-| height     | Number        |
+| Position   | Vector2       |
+| Size       | Vector2       |
 | Color      | Color3 Object |
 
 usage example:
 ```lua
-render:drawRectangle(1, 1, 10, 10, Color3.new(1, 0, 0))             
+render:drawRectangle(
+  Vector2.new(10, 10),
+  Vector2.new(10, 10),
+  Color3.new(1, 0, 0)
+)                                                                   
 ```
 </td>
 </table>
@@ -184,8 +187,8 @@ render:drawRectangle(1, 1, 10, 10, Color3.new(1, 0, 0))
 draw a circle.
 | Parameter  | Data Type     |
 | ---------- | ------------- |
-| X          | Number        |
-| Y          | Number        |
+| Position   | Vector2       |
+| Size       | Vector2       |
 | Radius     | Number        |
 | Fill       | Number        |
 | Color      | Color3 Object |
@@ -194,7 +197,11 @@ note: if fill is true the circle will be filled
 
 usage example:
 ```lua
-render:drawCircle(20, 20, 10, false, Color3.new(1, 0, 0))           
+render:drawCircle(
+  Vector2.new(20, 20),
+  10, false,
+  Color3.new(1, 0, 0)
+)                                                                   
 ```
 </td>
 </table>
@@ -205,18 +212,19 @@ render:drawCircle(20, 20, 10, false, Color3.new(1, 0, 0))
 draw a triangle.
 | Parameter  | Data Type     |
 | ---------- | ------------- |
-| X1         | Number        |
-| Y1         | Number        |
-| X2         | Number        |
-| Y2         | Number        |
-| X3         | Number        |
-| Y3         | Number        |
-| Thickness  | Number        |
+| Position 1 | Vector2       |
+| Position 2 | Vector2       |
+| Position 3 | Vector2       |
 | Color      | Color3 Object |
 
 usage example:
 ```lua
-render:drawTriangle(20, 10, 30, 20, 10, 20, 1, Color3.new(1, 1, 0)) 
+render:drawTriangle(
+  Vector2.new(20, 10),
+  Vector2.new(30, 20),
+  Vector2.new(10, 20),
+  1, Color3.new(1, 1, 0)
+)                                                                   
 ```
 </td>
 </table>
