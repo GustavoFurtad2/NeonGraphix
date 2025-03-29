@@ -46,12 +46,12 @@ end
 
 function Render2D:setResolution(width, height)
 
-    self.width, self.height = width, height
+    self.resolutionWidth, self.resolutionHeight = width, height
 end
 
 function Render2D:getResolution()
 
-    return self.width, self.height
+    return self.resolutionWidth, self.resolutionHeight
 end
 
 function Render2D:getGui()
