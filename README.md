@@ -198,3 +198,25 @@ render:drawCircle(20, 20, 10, false, Color3.new(1, 0, 0))
 ```
 </td>
 </table>
+<table>
+<td>
+<h3>:drawTriangle</h3>
+
+draw a triangle.
+| Parameter  | Data Type     |
+| ---------- | ------------- |
+| X1         | Number        |
+| Y1         | Number        |
+| X2         | Number        |
+| Y2         | Number        |
+| X3         | Number        |
+| Y3         | Number        |
+| Thickness  | Number        |
+| Color      | Color3 Object |
+
+usage example:
+```lua
+render:drawTriangle(20, 10, 30, 20, 10, 20, 1, Color3.new(1, 1, 0)) 
+```
+</td>
+</table>

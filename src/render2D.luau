@@ -161,6 +161,13 @@ function Render2D:drawLine(x1, y1, x2, y2, thickness, color)
     end
 end
 
+function Render2D:drawTriangle(x1, y1, x2, y2, x3, y3, thickness, color)
+
+    self:drawLine(x1, y1, x2, y2, thickness, color)
+    self:drawLine(x2, y2, x3, y3, thickness, color)
+    self:drawLine(x3, y3, x1, y1, thickness, color)
+end
+
 function Render2D:drawRectangle(x, y, width, height, color)
     
     self.currentRectangleIndex += 1
