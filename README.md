@@ -215,6 +215,8 @@ draw a triangle.
 | Position 1 | Vector2       |
 | Position 2 | Vector2       |
 | Position 3 | Vector2       |
+| Thickness  | Number        |
+| Fill       | Bool          |
 | Color      | Color3 Object |
 
 usage example:
@@ -223,8 +225,10 @@ render:drawTriangle(
   Vector2.new(20, 10),
   Vector2.new(30, 20),
   Vector2.new(10, 20),
-  1, Color3.new(1, 1, 0)
+  1, false, Color3.new(1, 1, 0)
 )                                                                   
 ```
+
+note: if fill is true the triangle will be filled
 </td>
 </table>
