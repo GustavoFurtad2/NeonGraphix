@@ -3,6 +3,19 @@ Render2D.__index = Render2D
 
 function Render2D.new(resolution : Vector2, windowPosition : Vector2, windowSize : Vector2) : table
 
+    if typeof(resolution) ~= "Vector2" then
+
+        error("In the resolution parameter of the Render2D constructor you must use a Vector2!")
+    
+    elseif typeof(windowPosition) ~= "Vector2" then
+
+        error("In the windowPosition parameter of the Render2D constructor you must use a Vector2!")
+        
+    elseif typeof(resolution) ~= "Vector2" then
+
+        error("In the windowSize parameter of the Render2D constructor you must use a Vector2!")
+    end
+
     local self = {
 
         player,
@@ -27,6 +40,12 @@ end
 
 function Render2D:init(player : Instance)
 
+    if typeof(player) ~= "Instance" then
+
+        error("In the player parameter of the Render2D init method you must use a Player!")
+    end
+
+
     self.player = player
     
     self.screenGui = Instance.new("ScreenGui")
@@ -40,6 +59,11 @@ function Render2D:init(player : Instance)
 end
 
 function Render2D:setResolution(resolution : Vector2)
+
+    if typeof(resolution) ~= "Vector2" then
+
+        error("In the resolution parameter of the Render2D setResolution method you must use a Vector2!")
+    end
 
     self.resolution = resolution
 end
@@ -55,6 +79,16 @@ function Render2D:getGui() : Instance
 end
 
 function Render2D:drawPixel(position : Vector2, color : Color3) : Instance
+
+    if typeof(position) ~= "Vector2" then
+
+        error("In the position parameter of the Render2D drawPixel method you must use a Vector2!")
+    
+    elseif typeof(color) ~= "Color3" then
+
+        error("In the color parameter of the Render2D drawPixel method you must use a Color3!")
+    end
+
 
     self.currentPixelIndex += 1
 
@@ -82,6 +116,23 @@ function Render2D:drawPixel(position : Vector2, color : Color3) : Instance
 end
 
 function Render2D:drawCircle(position : Vector2, radius : number, fill : bool, color : Color)
+
+    if typeof(position) ~= "Vector2" then
+
+        error("In the position parameter of the Render2D drawCircle method you must use a Vector2!")
+    
+    elseif typeof(radius) ~= "number" then
+
+        error("In the radius parameter of the Render2D drawCircle method you must use a number!")
+        
+    elseif typeof(fill) ~= "boolean" then
+
+        error("In the fill parameter of the Render2D drawCircle method you must use a Bool!")
+
+    elseif typeof(color) ~= "Color3" then
+
+        error("In the color parameter of the Render2D drawCircle method you must use a Color3!")
+    end
 
     local xStart = math.floor(position.X - radius)
     local xEnd = math.floor(position.X + radius)
@@ -113,6 +164,23 @@ function Render2D:drawCircle(position : Vector2, radius : number, fill : bool, c
 end
 
 function Render2D:drawLine(position1 : Vector2, position2 : Vector2, thickness : number, color : Color3)
+
+    if typeof(position1) ~= "Vector2" then
+
+        error("In the position1 parameter of the Render2D drawLine method you must use a Vector2!")
+    
+    elseif typeof(position2) ~= "Vector2" then
+
+        error("In the position2 parameter of the Render2D drawLine method you must use a Vector2!")
+        
+    elseif typeof(thickness) ~= "number" then
+
+        error("In the thickness parameter of the Render2D drawLine method you must use a number!")
+
+    elseif typeof(color) ~= "Color3" then
+
+        error("In the color parameter of the Render2D drawLine method you must use a Color3!")
+    end
 
     local dx = math.abs(position2.X - position1.X)
     local dy = math.abs(position2.Y - position1.Y)
@@ -167,6 +235,26 @@ end
 
 function Render2D:drawTriangle(position1 : Vector2, position2 : Vector2, position3 : Vector2, thickness : number, fill : bool, color : Color3)
 
+    if typeof(position1) ~= "Vector2" then
+
+        error("In the position1 parameter of the Render2D drawTriangle method you must use a Vector2!")
+    elseif typeof(position2) ~= "Vector2" then
+
+        error("In the position2 parameter of the Render2D drawTriangle method you must use a Vector2!")
+    elseif typeof(position3) ~= "Vector2" then
+
+        error("In the position3 parameter of the Render2D drawTriangle method you must use a Vector2!")
+    elseif typeof(thickness) ~= "number" then
+
+        error("In the thickness parameter of the Render2D drawTriangle method you must use a number!")
+    elseif typeof(fill) ~= "boolean" then
+
+        error("In the fill parameter of the Render2D drawTriangle method you must use a Bool!")
+    elseif typeof(color) ~= "Color3" then
+
+        error("In the color parameter of the Render2D drawTriangle method you must use a Color3!")
+    end
+
     if fill then
 
         local points = {position1, position2, position3}
@@ -202,6 +290,17 @@ end
 
 function Render2D:drawRectangle(position : Vector2, size : Vector2, color : Color3) : instance
     
+    if typeof(position) ~= "Vector2" then
+
+        error("In the position parameter of the Render2D drawRectangle method you must use a Vector2!")
+    elseif typeof(size) ~= "Vector2" then
+
+        error("In the size parameter of the Render2D drawRectangle method you must use a Vector2!")
+    elseif typeof(color) ~= "Color3" then
+
+        error("In the color parameter of the Render2D drawRectangle method you must use a Color3!")
+    end
+
     self.currentRectangleIndex += 1
 
     local rectangle
@@ -228,6 +327,11 @@ function Render2D:drawRectangle(position : Vector2, size : Vector2, color : Colo
 end
 
 function Render2D:clear(color : Color3)
+
+    if typeof(color) ~= "Color3" then
+
+        error("In the color parameter of the Render2D clear method you must use a Color3!")
+    end
 
     self.backgroundColor = color
 
