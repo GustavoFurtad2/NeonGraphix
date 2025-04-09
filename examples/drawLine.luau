@@ -8,9 +8,9 @@ render:init(game.Players.LocalPlayer)
 
 game:GetService("RunService").RenderStepped:Connect(function()
 	
-	render:clear(Color3.new(0, 0, 0))
+    render:clear(Color3.new(0, 0, 0))
 		
-	render:drawLine(Vector2.new(1, 1), Vector2.new(320, 248), 1, Color3.new(1, 0, 0))
+    render:drawLine(Vector2.new(1, 1), Vector2.new(320, 248), 1, Color3.new(1, 0, 0))
 	
-	render:update()
+    render:update()
 end)
