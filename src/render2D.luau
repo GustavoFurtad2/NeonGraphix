@@ -1,7 +1,7 @@
 local Render2D = {}
 Render2D.__index = Render2D
 
-function Render2D.new(resolution, windowPosition, windowSize)
+function Render2D.new(resolution : Vector2, windowPosition : Vector2, windowSize : Vector2) : table
 
     local self = {
 
@@ -25,7 +25,7 @@ function Render2D.new(resolution, windowPosition, windowSize)
     return setmetatable(self, Render2D)
 end
 
-function Render2D:init(player)
+function Render2D:init(player : Instance)
 
     self.player = player
     
@@ -39,22 +39,22 @@ function Render2D:init(player)
     self.backgroundFrame.Parent = self.screenGui
 end
 
-function Render2D:setResolution(resolution)
+function Render2D:setResolution(resolution : Vector2)
 
     self.resolution = resolution
 end
 
-function Render2D:getResolution()
+function Render2D:getResolution() : Vector2
 
     return self.resolution
 end
 
-function Render2D:getGui()
+function Render2D:getGui() : Instance
 
     return self.screenGui
 end
 
-function Render2D:drawPixel(position, color)
+function Render2D:drawPixel(position : Vector2, color : Color3) : Instance
 
     self.currentPixelIndex += 1
 
@@ -81,7 +81,7 @@ function Render2D:drawPixel(position, color)
     return pixel
 end
 
-function Render2D:drawCircle(position, radius, fill, color)
+function Render2D:drawCircle(position : Vector2, radius : number, fill : bool, color : Color)
 
     local xStart = math.floor(position.X - radius)
     local xEnd = math.floor(position.X + radius)
@@ -112,7 +112,7 @@ function Render2D:drawCircle(position, radius, fill, color)
     end
 end
 
-function Render2D:drawLine(position1, position2, thickness, color)
+function Render2D:drawLine(position1 : Vector2, position2 : Vector2, thickness : number, color : Color3)
 
     local dx = math.abs(position2.X - position1.X)
     local dy = math.abs(position2.Y - position1.Y)
@@ -156,7 +156,7 @@ function Render2D:drawLine(position1, position2, thickness, color)
     end
 end
 
-local function interpolateX(p1, p2, y)
+local function interpolateX(p1 : Vector2, p2 : Vector2, y : number) : (number)
             
     if p1.Y == p2.Y then 
         return p1.X
@@ -165,7 +165,7 @@ local function interpolateX(p1, p2, y)
     return p1.X + (y - p1.Y) * (p2.X - p1.X) / (p2.Y - p1.Y)
 end
 
-function Render2D:drawTriangle(position1, position2, position3, thickness, fill, color)
+function Render2D:drawTriangle(position1 : Vector2, position2 : Vector2, position3 : Vector2, thickness : number, fill : bool, color : Color3)
 
     if fill then
 
@@ -200,7 +200,7 @@ function Render2D:drawTriangle(position1, position2, position3, thickness, fill,
     self:drawLine(Vector2.new(position3.X, position3.Y), Vector2.new(position1.X, position1.Y), thickness, color)
 end
 
-function Render2D:drawRectangle(position, size, color)
+function Render2D:drawRectangle(position : Vector2, size : Vector2, color : Color3) : instance
     
     self.currentRectangleIndex += 1
 
@@ -227,7 +227,7 @@ function Render2D:drawRectangle(position, size, color)
     return rectangle
 end
 
-function Render2D:clear(color)
+function Render2D:clear(color : Color3)
 
     self.backgroundColor = color
 
