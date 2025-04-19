@@ -111,6 +111,7 @@ function Render2D:drawPixel(position : Vector2, color : Color3) : Instance
     pixel.Size = UDim2.new(widthScale, 0, heightScale, 0)
     pixel.Transparency = 1
     pixel.BackgroundColor3 = color
+    pixel.BorderSizePixel = 0
 
     return pixel
 end
@@ -322,6 +323,7 @@ function Render2D:drawRectangle(position : Vector2, size : Vector2, color : Colo
     rectangle.Size = UDim2.new(widthScale * self.windowSize.X, 0, heightScale * self.windowSize.Y, 0)
     rectangle.Transparency = 1
     rectangle.BackgroundColor3 = color
+    rectangle.BorderSizePixel = 0
 
     return rectangle
 end
