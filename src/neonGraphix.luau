@@ -1,3 +1,3 @@
 return {
-    Renderer2D = require(script.Parent.render2D),
+    render2D = require(script.Parent.render2D),
 }
