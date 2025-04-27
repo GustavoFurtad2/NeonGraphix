@@ -26,34 +26,6 @@ player2.y = player1.y
 
 player2.x = RESOLUTION_WIDTH - player2.w
 
-local holdingArrowUp, holdingArrowDown, holdingW, holdingS = false, false, false, false
-
-UIS.InputBegan:Connect(function(input)
-
-	if input.KeyCode == Enum.KeyCode.Up then
-		holdingArrowUp = true
-	elseif input.KeyCode == Enum.KeyCode.Down then
-		holdingArrowDown = true
-	elseif input.KeyCode == Enum.KeyCode.W then
-		holdingW = true
-	elseif input.KeyCode == Enum.KeyCode.S then
-		holdingS = true
-	end
-end)
-
-UIS.InputEnded:Connect(function(input)
-
-	if input.KeyCode == Enum.KeyCode.Up then
-		holdingArrowUp = false
-	elseif input.KeyCode == Enum.KeyCode.Down then
-		holdingArrowDown = false
-	elseif input.KeyCode == Enum.KeyCode.W then
-		holdingW = false
-	elseif input.KeyCode == Enum.KeyCode.S then
-		holdingS = false
-	end
-end)
-
 local moveSpeed = 1
 
 local ball = {x = nil, y = nil, w = 5, h = 5}
@@ -112,26 +84,26 @@ end
 
 local function updatePlayers()
 
-	if holdingW then
+	if UIS:IsKeyDown(Enum.KeyCode.W) then
 
 		if player1.y >= 0 then
 			player1.y -= moveSpeed
 		end
 
-	elseif holdingS then
+	elseif UIS:IsKeyDown(Enum.KeyCode.S) then
 
 		if player1.y + player1.h <= RESOLUTION_HEIGHT then
 			player1.y += moveSpeed
 		end
 	end
 
-	if holdingArrowUp then
+	if UIS:IsKeyDown(Enum.KeyCode.Up) then
 
 		if player2.y >= 0 then
 			player2.y -= moveSpeed
 		end
 
-	elseif holdingArrowDown then
+	elseif UIS:IsKeyDown(Enum.KeyCode.Down) then
 
 		if player2.y + player2.h <= RESOLUTION_HEIGHT then
 			player2.y += moveSpeed
