@@ -5,15 +5,15 @@ function Render2D.createRenderer(resolution : Vector2, windowPosition : Vector2,
 
     if typeof(resolution) ~= "Vector2" then
 
-        error("In the resolution parameter of the Render2D constructor you must use a Vector2!")
+        error("In the resolution parameter of the Render2D createRenderer you must use a Vector2!")
     
     elseif typeof(windowPosition) ~= "Vector2" then
 
-        error("In the windowPosition parameter of the Render2D constructor you must use a Vector2!")
+        error("In the windowPosition parameter of the Render2D createRenderer you must use a Vector2!")
         
     elseif typeof(resolution) ~= "Vector2" then
 
-        error("In the windowSize parameter of the Render2D constructor you must use a Vector2!")
+        error("In the windowSize parameter of the Render2D createRenderer you must use a Vector2!")
     end
 
     table.insert(Render2D.Renderers, {
@@ -40,9 +40,13 @@ end
 
 function Render2D.init(ID : number, player : Instance)
 
-    if typeof(player) ~= "Instance" then
+    if typeof(ID) ~= "number" then
 
-        error("In the player parameter of the Render2D init method you must use a Player!")
+        error("In the ID parameter of the Render2D init you must use a number!")
+    
+    elseif typeof(player) ~= "Instance" then
+
+        error("In the player parameter of the Render2D init you must use a Player!")
     end
 
 
@@ -60,9 +64,13 @@ end
 
 function Render2D.setResolution(ID : number, resolution : Vector2)
 
-    if typeof(resolution) ~= "Vector2" then
+    if typeof(ID) ~= "number" then
 
-        error("In the resolution parameter of the Render2D setResolution method you must use a Vector2!")
+        error("In the ID parameter of the Render2D setResolution you must use a number!")
+
+    elseif typeof(resolution) ~= "Vector2" then
+
+        error("In the resolution parameter of the Render2D setResolution you must use a Vector2!")
     end
 
     Render2D.Renderers[ID].resolution = resolution
@@ -70,28 +78,47 @@ end
 
 function Render2D.getResolution(ID : number) : Vector2
 
+    if typeof(ID) ~= "number" then
+
+        error("In the ID parameter of the Render2D getResolution you must use a number!")
+    end
+
     return Render2D.Renderers[ID].resolution
 end
 
 function Render2D:getGui(ID : number) : Instance
+
+    if typeof(ID) ~= "number" then
+
+        error("In the ID parameter of the Render2D getGui you must use a number!")
+    end
 
     return Render2D.Renderers[ID].screenGui
 end
 
 function Render2D.delete(ID : number)
 
+    if typeof(ID) ~= "number" then
+
+        error("In the ID parameter of the Render2D delete you must use a number!")
+    end
+
     table.remove(Render2D.Renderers, ID)
 end
 
 function Render2D.drawPixel(ID : number, position : Vector2, color : Color3) : Instance
 
-    if typeof(position) ~= "Vector2" then
+    if typeof(ID) ~= "number" then
 
-        error("In the position parameter of the Render2D drawPixel method you must use a Vector2!")
+        error("In the ID parameter of the Render2D drawPixel you must use a number!")
+
+    elseif typeof(position) ~= "Vector2" then
+
+        error("In the position parameter of the Render2D drawPixel you must use a Vector2!")
     
     elseif typeof(color) ~= "Color3" then
 
-        error("In the color parameter of the Render2D drawPixel method you must use a Color3!")
+        error("In the color parameter of the Render2D drawPixel you must use a Color3!")
     end
 
 
@@ -123,21 +150,25 @@ end
 
 function Render2D.drawCircle(ID : number, position : Vector2, radius : number, fill : bool, color : Color)
 
-    if typeof(position) ~= "Vector2" then
+    if typeof(ID) ~= "number" then
 
-        error("In the position parameter of the Render2D drawCircle method you must use a Vector2!")
+        error("In the ID parameter of the Render2D drawCircle you must use a number!")
+
+    elseif typeof(position) ~= "Vector2" then
+
+        error("In the position parameter of the Render2D drawCircle you must use a Vector2!")
     
     elseif typeof(radius) ~= "number" then
 
-        error("In the radius parameter of the Render2D drawCircle method you must use a number!")
+        error("In the radius parameter of the Render2D drawCircle you must use a number!")
         
     elseif typeof(fill) ~= "boolean" then
 
-        error("In the fill parameter of the Render2D drawCircle method you must use a Bool!")
+        error("In the fill parameter of the Render2D drawCircle you must use a Bool!")
 
     elseif typeof(color) ~= "Color3" then
 
-        error("In the color parameter of the Render2D drawCircle method you must use a Color3!")
+        error("In the color parameter of the Render2D drawCircle you must use a Color3!")
     end
 
     local xStart = math.floor(position.X - radius)
@@ -171,21 +202,25 @@ end
 
 function Render2D.drawLine(ID : number, position1 : Vector2, position2 : Vector2, thickness : number, color : Color3)
 
-    if typeof(position1) ~= "Vector2" then
+    if typeof(ID) ~= "number" then
 
-        error("In the position1 parameter of the Render2D drawLine method you must use a Vector2!")
+        error("In the ID parameter of the Render2D drawLine you must use a number!")
+
+    elseif typeof(position1) ~= "Vector2" then
+
+        error("In the position1 parameter of the Render2D drawLine you must use a Vector2!")
     
     elseif typeof(position2) ~= "Vector2" then
 
-        error("In the position2 parameter of the Render2D drawLine method you must use a Vector2!")
+        error("In the position2 parameter of the Render2D drawLine you must use a Vector2!")
         
     elseif typeof(thickness) ~= "number" then
 
-        error("In the thickness parameter of the Render2D drawLine method you must use a number!")
+        error("In the thickness parameter of the Render2D drawLine you must use a number!")
 
     elseif typeof(color) ~= "Color3" then
 
-        error("In the color parameter of the Render2D drawLine method you must use a Color3!")
+        error("In the color parameter of the Render2D drawLine you must use a Color3!")
     end
 
     local dx = math.abs(position2.X - position1.X)
@@ -241,24 +276,28 @@ end
 
 function Render2D.drawTriangle(ID : number, position1 : Vector2, position2 : Vector2, position3 : Vector2, thickness : number, fill : bool, color : Color3)
 
-    if typeof(position1) ~= "Vector2" then
+    if typeof(ID) ~= "number" then
 
-        error("In the position1 parameter of the Render2D drawTriangle method you must use a Vector2!")
+        error("In the ID parameter of the Render2D drawTriangle you must use a number!")
+
+    elseif typeof(position1) ~= "Vector2" then
+
+        error("In the position1 parameter of the Render2D drawTriangle you must use a Vector2!")
     elseif typeof(position2) ~= "Vector2" then
 
-        error("In the position2 parameter of the Render2D drawTriangle method you must use a Vector2!")
+        error("In the position2 parameter of the Render2D drawTriangle you must use a Vector2!")
     elseif typeof(position3) ~= "Vector2" then
 
-        error("In the position3 parameter of the Render2D drawTriangle method you must use a Vector2!")
+        error("In the position3 parameter of the Render2D drawTriangle you must use a Vector2!")
     elseif typeof(thickness) ~= "number" then
 
-        error("In the thickness parameter of the Render2D drawTriangle method you must use a number!")
+        error("In the thickness parameter of the Render2D drawTriangle you must use a number!")
     elseif typeof(fill) ~= "boolean" then
 
-        error("In the fill parameter of the Render2D drawTriangle method you must use a Bool!")
+        error("In the fill parameter of the Render2D drawTriangle you must use a Bool!")
     elseif typeof(color) ~= "Color3" then
 
-        error("In the color parameter of the Render2D drawTriangle method you must use a Color3!")
+        error("In the color parameter of the Render2D drawTriangle you must use a Color3!")
     end
 
     if fill then
@@ -296,15 +335,19 @@ end
 
 function Render2D.drawRectangle(ID : number, position : Vector2, size : Vector2, color : Color3) : instance
     
-    if typeof(position) ~= "Vector2" then
+    if typeof(ID) ~= "number" then
 
-        error("In the position parameter of the Render2D drawRectangle method you must use a Vector2!")
+        error("In the ID parameter of the Render2D drawRectangle you must use a number!")
+
+    elseif typeof(position) ~= "Vector2" then
+
+        error("In the position parameter of the Render2D drawRectangle you must use a Vector2!")
     elseif typeof(size) ~= "Vector2" then
 
-        error("In the size parameter of the Render2D drawRectangle method you must use a Vector2!")
+        error("In the size parameter of the Render2D drawRectangle you must use a Vector2!")
     elseif typeof(color) ~= "Color3" then
 
-        error("In the color parameter of the Render2D drawRectangle method you must use a Color3!")
+        error("In the color parameter of the Render2D drawRectangle you must use a Color3!")
     end
 
     Render2D.Renderers[ID].currentRectangleIndex += 1
@@ -335,9 +378,13 @@ end
 
 function Render2D.clear(ID : number, color : Color3)
 
-    if typeof(color) ~= "Color3" then
+    if typeof(ID) ~= "number" then
 
-        error("In the color parameter of the Render2D clear method you must use a Color3!")
+        error("In the ID parameter of the Render2D clear you must use a number!")
+    
+    elseif typeof(color) ~= "Color3" then
+
+        error("In the color parameter of the Render2D clear you must use a Color3!")
     end
 
     Render2D.Renderers[ID].backgroundColor = color
@@ -354,6 +401,11 @@ function Render2D.clear(ID : number, color : Color3)
 end
 
 function Render2D.update(ID : number)
+
+    if typeof(ID) ~= "number" then
+
+        error("In the ID parameter of the Render2D update you must use a number!")
+    end
 
     Render2D.Renderers[ID].backgroundFrame.BackgroundColor3 = Render2D.Renderers[ID].backgroundColor
 
