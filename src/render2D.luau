@@ -1,5 +1,4 @@
 local Render2D = {Renderers = {}}
-Render2D.__index = Render2D
 
 function Render2D.createRenderer(resolution : Vector2, windowPosition : Vector2, windowSize : Vector2) : table
 
