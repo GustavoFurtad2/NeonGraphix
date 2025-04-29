@@ -85,7 +85,7 @@ function Render2D.getResolution(ID : number) : Vector2
     return Render2D.Renderers[ID].resolution
 end
 
-function Render2D:getGui(ID : number) : Instance
+function Render2D.getGui(ID : number) : Instance
 
     if typeof(ID) ~= "number" then
 
