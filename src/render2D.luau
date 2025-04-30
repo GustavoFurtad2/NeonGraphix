@@ -233,6 +233,8 @@ function Render2D.drawLine(ID : number, position1 : Vector2, position2 : Vector2
 
     local halfThickness = math.floor(thickness / 2)
 
+    local alreadyEnteredInsideScreen = false
+
     while true do
 
         for tx = -halfThickness, halfThickness do
@@ -242,7 +244,15 @@ function Render2D.drawLine(ID : number, position1 : Vector2, position2 : Vector2
                 local px, py = position1.X + tx, position1.Y + ty
 
                 if px >= 0 and px < Render2D.Renderers[ID].resolution.X and py >= 0 and py < Render2D.Renderers[ID].resolution.Y then
+
+                    alreadyEnteredInsideScreen = true
                     Render2D.drawPixel(ID, Vector2.new(px + Render2D.Renderers[ID].windowPosition.X, py + Render2D.Renderers[ID].windowPosition.Y), color)
+
+                else
+
+                    if alreadyEnteredInsideScreen then
+                        return
+                    end
                 end
             end
         end
