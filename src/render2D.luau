@@ -132,6 +132,7 @@ function Render2D.drawPixel(ID : number, position : Vector2, color : Color3) : I
 
     pixel = Render2D.Renderers[ID].componentsBuffer.pixels[Render2D.Renderers[ID].currentPixelIndex]
     pixel.Parent = Render2D.Renderers[ID].screenGui
+    pixel:SetAttribute("ShouldDraw", true)
 
     local xScale = position.X / Render2D.Renderers[ID].resolution.X
     local yScale = position.Y / Render2D.Renderers[ID].resolution.Y
@@ -360,6 +361,7 @@ function Render2D.drawRectangle(ID : number, position : Vector2, size : Vector2,
 
     rectangle = Render2D.Renderers[ID].componentsBuffer.rectangles[Render2D.Renderers[ID].currentRectangleIndex]
     rectangle.Parent = Render2D.Renderers[ID].screenGui
+    rectangle:SetAttribute("ShouldDraw", true)
     
     local xScale = position.X / Render2D.Renderers[ID].resolution.X
     local yScale = position.Y / Render2D.Renderers[ID].resolution.Y
@@ -390,11 +392,13 @@ function Render2D.clear(ID : number, color : Color3)
 
     for index, component in next, Render2D.Renderers[ID].componentsBuffer.rectangles do
 
+        component:SetAttribute("ShouldDraw", false)
         component.Transparency = 1
     end
 
     for index, component in next, Render2D.Renderers[ID].componentsBuffer.pixels do
 
+        component:SetAttribute("ShouldDraw", false)
         component.Transparency = 1
     end
 end
@@ -410,12 +414,16 @@ function Render2D.update(ID : number)
 
     for index, component in next, Render2D.Renderers[ID].componentsBuffer.rectangles do
 
-        component.Transparency = 0
+        if component:GetAttribute("ShouldDraw") then
+            component.Transparency = 0
+        end
     end
 
     for index, component in next, Render2D.Renderers[ID].componentsBuffer.pixels do
 
-        component.Transparency = 0
+        if component:GetAttribute("ShouldDraw") then
+            component.Transparency = 0
+        end
     end
 
     Render2D.Renderers[ID].currentPixelIndex = 0
