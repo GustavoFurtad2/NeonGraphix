@@ -429,7 +429,7 @@ function Render2D.update(ID : number)
     Render2D.Renderers[ID].currentPixelIndex = 0
     Render2D.Renderers[ID].currentRectangleIndex = 0
 
-    wait()
+    task.wait()
 end
 
 return Render2D
