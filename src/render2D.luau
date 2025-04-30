@@ -134,8 +134,8 @@ function Render2D.drawPixel(ID : number, position : Vector2, color : Color3) : I
     pixel.Parent = Render2D.Renderers[ID].screenGui
     pixel:SetAttribute("ShouldDraw", true)
 
-    local xScale = position.X / Render2D.Renderers[ID].resolution.X
-    local yScale = position.Y / Render2D.Renderers[ID].resolution.Y
+    local xScale = math.ceil(position.X) / Render2D.Renderers[ID].resolution.X
+    local yScale = math.ceil(position.Y) / Render2D.Renderers[ID].resolution.Y
     local widthScale = Render2D.Renderers[ID].windowSize.X / Render2D.Renderers[ID].resolution.X
     local heightScale = Render2D.Renderers[ID].windowSize.Y / Render2D.Renderers[ID].resolution.Y
 
@@ -363,8 +363,8 @@ function Render2D.drawRectangle(ID : number, position : Vector2, size : Vector2,
     rectangle.Parent = Render2D.Renderers[ID].screenGui
     rectangle:SetAttribute("ShouldDraw", true)
     
-    local xScale = position.X / Render2D.Renderers[ID].resolution.X
-    local yScale = position.Y / Render2D.Renderers[ID].resolution.Y
+    local xScale = math.ceil(position.X) / Render2D.Renderers[ID].resolution.X
+    local yScale = math.ceil(position.Y) / Render2D.Renderers[ID].resolution.Y
     local widthScale = size.X / Render2D.Renderers[ID].resolution.X
     local heightScale = size.Y / Render2D.Renderers[ID].resolution.Y
 
