@@ -375,8 +375,8 @@ function Render2D.drawRectangle(ID : number, position : Vector2, size : Vector2,
     
     local xScale = math.ceil(position.X) / Render2D.Renderers[ID].resolution.X
     local yScale = math.ceil(position.Y) / Render2D.Renderers[ID].resolution.Y
-    local widthScale = size.X / Render2D.Renderers[ID].resolution.X
-    local heightScale = size.Y / Render2D.Renderers[ID].resolution.Y
+    local widthScale = math.ceil(size.X) / Render2D.Renderers[ID].resolution.X
+    local heightScale = math.ceil(size.Y) / Render2D.Renderers[ID].resolution.Y
 
     rectangle.Position = UDim2.new((xScale * Render2D.Renderers[ID].windowSize.X) + Render2D.Renderers[ID].windowPosition.X, 0, (yScale * Render2D.Renderers[ID].windowSize.Y) + Render2D.Renderers[ID].windowPosition.Y, 0)
     rectangle.Size = UDim2.new(widthScale * Render2D.Renderers[ID].windowSize.X, 0, heightScale * Render2D.Renderers[ID].windowSize.Y, 0)
