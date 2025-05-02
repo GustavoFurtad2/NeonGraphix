@@ -25,13 +25,9 @@ function Render2D.createRenderer(resolution : Vector2, windowPosition : Vector2,
 
         backgroundColor = Color3.new(0, 0, 0),
 
-        componentsBuffer = {
-            pixels = {},
-            rectangles = {},
-        },
+        componentsBuffer = {},
 
-        currentPixelIndex = 0,
-        currentRectangleIndex = 0
+        currentComponentsIndex = 0
     })
 
     return #Render2D.Renderers
@@ -121,16 +117,16 @@ function Render2D.drawPixel(ID : number, position : Vector2, color : Color3) : I
     end
 
 
-    Render2D.Renderers[ID].currentPixelIndex += 1
+    Render2D.Renderers[ID].currentComponentsIndex += 1
 
     local pixel
 
-    if Render2D.Renderers[ID].currentPixelIndex > #Render2D.Renderers[ID].componentsBuffer.pixels then
+    if Render2D.Renderers[ID].currentComponentsIndex > #Render2D.Renderers[ID].componentsBuffer then
         pixel = Instance.new("Frame")
-        table.insert(Render2D.Renderers[ID].componentsBuffer.pixels, pixel)
+        table.insert(Render2D.Renderers[ID].componentsBuffer, pixel)
     end
 
-    pixel = Render2D.Renderers[ID].componentsBuffer.pixels[Render2D.Renderers[ID].currentPixelIndex]
+    pixel = Render2D.Renderers[ID].componentsBuffer[Render2D.Renderers[ID].currentComponentsIndex]
     pixel.Parent = Render2D.Renderers[ID].screenGui
     pixel:SetAttribute("ShouldDraw", true)
 
@@ -360,16 +356,16 @@ function Render2D.drawRectangle(ID : number, position : Vector2, size : Vector2,
         error("In the color parameter of the Render2D drawRectangle you must use a Color3!")
     end
 
-    Render2D.Renderers[ID].currentRectangleIndex += 1
+    Render2D.Renderers[ID].currentComponentsIndex += 1
 
     local rectangle
 
-    if Render2D.Renderers[ID].currentRectangleIndex > #Render2D.Renderers[ID].componentsBuffer.rectangles then
+    if Render2D.Renderers[ID].currentComponentsIndex > #Render2D.Renderers[ID].componentsBuffer then
         rectangle = Instance.new("Frame")
-        table.insert(Render2D.Renderers[ID].componentsBuffer.rectangles, rectangle)
+        table.insert(Render2D.Renderers[ID].componentsBuffer, rectangle)
     end
 
-    rectangle = Render2D.Renderers[ID].componentsBuffer.rectangles[Render2D.Renderers[ID].currentRectangleIndex]
+    rectangle = Render2D.Renderers[ID].componentsBuffer[Render2D.Renderers[ID].currentComponentsIndex]
     rectangle.Parent = Render2D.Renderers[ID].screenGui
     rectangle:SetAttribute("ShouldDraw", true)
     
@@ -400,13 +396,7 @@ function Render2D.clear(ID : number, color : Color3)
 
     Render2D.Renderers[ID].backgroundColor = color
 
-    for index, component in next, Render2D.Renderers[ID].componentsBuffer.rectangles do
-
-        component:SetAttribute("ShouldDraw", false)
-        component.Transparency = 1
-    end
-
-    for index, component in next, Render2D.Renderers[ID].componentsBuffer.pixels do
+    for index, component in next, Render2D.Renderers[ID].componentsBuffer do
 
         component:SetAttribute("ShouldDraw", false)
         component.Transparency = 1
@@ -422,22 +412,14 @@ function Render2D.update(ID : number)
 
     Render2D.Renderers[ID].backgroundFrame.BackgroundColor3 = Render2D.Renderers[ID].backgroundColor
 
-    for index, component in next, Render2D.Renderers[ID].componentsBuffer.rectangles do
+    for index, component in next, Render2D.Renderers[ID].componentsBuffer do
 
         if component:GetAttribute("ShouldDraw") then
             component.Transparency = 0
         end
     end
 
-    for index, component in next, Render2D.Renderers[ID].componentsBuffer.pixels do
-
-        if component:GetAttribute("ShouldDraw") then
-            component.Transparency = 0
-        end
-    end
-
-    Render2D.Renderers[ID].currentPixelIndex = 0
-    Render2D.Renderers[ID].currentRectangleIndex = 0
+    Render2D.Renderers[ID].currentComponentsIndex = 0
 
     task.wait()
 end
