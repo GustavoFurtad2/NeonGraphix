@@ -1,6 +1,6 @@
 # NeonGraphix
 
-A Graphics Lib for Roblox
+A Frame-based Graphics Lib for Roblox
 
 # How to start?
 
