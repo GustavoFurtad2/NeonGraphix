@@ -191,10 +191,13 @@ function RaycastRender.renderSectors(ID : number, sectorsQueue : table, lodScale
 
                 local t = (x - sx1) / (sx2 - sx1)
 
-                local yTop = ((sy1 - wallHeight1) * (1 - t)) + ((sy2 - wallHeight2) * t)
-                local yBottom = (sy1 * (1 - t)) + (sy2 * t)
+                local yTopF = ((sy1 - wallHeight1) * (1 - t)) + ((sy2 - wallHeight2) * t)
+                local yBottomF = (sy1 * (1 - t)) + (sy2 * t)
+                
+                local yTop = math.floor(yTopF + 0.5)
+                local yBottom = math.floor(yBottomF + 0.5)
                 local height = yBottom - yTop
-
+                
                 Render2D.drawRectangle(currentRenderer.render2DID, Vector2.new(x, yTop), Vector2.new(step, height), sector.color)
             end
         end
