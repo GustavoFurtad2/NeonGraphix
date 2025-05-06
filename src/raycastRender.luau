@@ -188,7 +188,7 @@ function RaycastRender.renderSectors(ID : number, sectorsQueue : table, lodScale
             local step = math.max(1, math.floor(wallWidth / (lodFactor * 20)))
 
             local wallVector = (wall.b - wall.a).Unit
-            local cameraDirectionadd shadow to walls based on camera direction = Vector2.new(cosAngle, sinAngle).Unit
+            local cameraDirection = Vector2.new(cosAngle, sinAngle).Unit
             
             local normal = Vector2.new(-wallVector.Y, wallVector.X)
             local brightness = math.clamp(normal:Dot(cameraDirection), 0.2, 1)
