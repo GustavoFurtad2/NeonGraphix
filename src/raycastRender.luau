@@ -187,6 +187,14 @@ function RaycastRender.renderSectors(ID : number, sectorsQueue : table, lodScale
             local wallWidth = math.abs(sx2 - sx1)
             local step = math.max(1, math.floor(wallWidth / (lodFactor * 20)))
 
+            local wallVector = (wall.b - wall.a).Unit
+            local cameraDirectionadd shadow to walls based on camera direction = Vector2.new(cosAngle, sinAngle).Unit
+            
+            local normal = Vector2.new(-wallVector.Y, wallVector.X)
+            local brightness = math.clamp(normal:Dot(cameraDirection), 0.2, 1)
+            
+            local shadedColor = Color3.new(sector.color.R * brightness, sector.color.G * brightness, sector.color.B * brightness)
+
             for x = xStart, xEnd, step do
 
                 local t = (x - sx1) / (sx2 - sx1)
@@ -198,7 +206,7 @@ function RaycastRender.renderSectors(ID : number, sectorsQueue : table, lodScale
                 local yBottom = math.floor(yBottomF + 0.5)
                 local height = yBottom - yTop
                 
-                Render2D.drawRectangle(currentRenderer.render2DID, Vector2.new(x, yTop), Vector2.new(step, height), sector.color)
+                Render2D.drawRectangle(currentRenderer.render2DID, Vector2.new(x, yTop), Vector2.new(step, height), shadedColor)
             end
         end
     end
