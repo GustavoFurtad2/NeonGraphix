@@ -1,0 +1,12 @@
+{
+  "name": "NeonGraphix",
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+      "NeonGraphix": {
+        "$path": "src/"
+      }
+    }
+  }
+}
