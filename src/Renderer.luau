@@ -342,61 +342,79 @@ local function fastDrawLine(self, y, x1, x2)
 end
 
 local function invSlope(xa, ya, xb, yb)
+	
+	local dy = yb - ya
 
-	if ya == yb then
+	if dy == 0 then
 		return 0
 	end
 
-	return (xb - xa) / (yb - ya)
+	return (xb - xa) / dy
 end
 
-function Renderer:drawFilledTriangle(x1 : number, y1 : number, x2 : number, y2 : number, x3 : number, y3 : number)
-
+function Renderer:drawFilledTriangle(x1, y1, x2, y2, x3, y3)
+	
 	x1, y1 = math.floor(x1), math.floor(y1)
 	x2, y2 = math.floor(x2), math.floor(y2)
 	x3, y3 = math.floor(x3), math.floor(y3)
-
+	
 	if (x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1) == 0 then
 		return
 	end
-
+	
 	if y1 > y2 then
 		x1, y1, x2, y2 = x2, y2, x1, y1
 	end
-
+	
 	if y1 > y3 then
 		x1, y1, x3, y3 = x3, y3, x1, y1
 	end
-
+	
 	if y2 > y3 then
 		x2, y2, x3, y3 = x3, y3, x2, y2
 	end
-
+	
 	if y3 < 0 or y1 >= self.height then
 		return
 	end
-
+	
 	local dx13 = invSlope(x1, y1, x3, y3)
 	local dx12 = invSlope(x1, y1, x2, y2)
 	local dx23 = invSlope(x2, y2, x3, y3)
 
 	local sx = x1
 	local ex = x1
-
-	for y = math.max(y1, 0), math.min(y2 - 1, self.height - 1) do
-
+	
+	local startY = math.max(y1, 0)
+	local endY = math.min(y2 - 1, self.height - 1)
+	
+	local dy = startY - y1
+	
+	sx += dx13 * dy
+	ex += dx12 * dy
+	
+	for y = startY, endY do
+		
 		fastDrawLine(self, y, math.floor(sx), math.floor(ex))
-
+		
 		sx += dx13
 		ex += dx12
 	end
-
+	
 	ex = x2
-
-	for y = y2, y3 do
-
+	
+	startY = math.max(y2, 0)
+	endY = math.min(y3, self.height - 1)
+	
+	dy = startY - y2
+	
+	sx += dx13 * dy
+	ex += dx23 * dy
+	
+	for y = startY, endY do
+		
 		fastDrawLine(self, y, math.floor(sx), math.floor(ex))
-
+		
 		sx += dx13
 		ex += dx23
 	end
