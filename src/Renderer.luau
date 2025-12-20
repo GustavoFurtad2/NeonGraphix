@@ -1,3 +1,4 @@
+local Mat4 = require(script.Parent.Mat4)
 local AssetService = game:GetService("AssetService")
 
 local Renderer = {}
@@ -28,6 +29,8 @@ function Renderer.new(width : number, height : number)
 
 	self.width = math.floor(width)
 	self.height = math.floor(height)
+	self.halfWidth = self.width / 2
+	self.halfHeight = self.height / 2
 	self.size = self.width * self.height
 
 	self.frameBufferSize = self.size * 4
@@ -466,6 +469,40 @@ function Renderer:drawFilledCircle(x : number, y : number, radius : number)
 			end
 		end
 	end
+end
+
+local DISTANCE = 120
+local NEAR_Z = 0.0001
+
+local PROJ = Mat4.perspective(DISTANCE)
+
+local function project(self, v)
+	
+	local clip = Mat4.mulVec4(PROJ, {x = v.x, y = v.y, z = v.z, w = 1})
+	
+	if clip.w <= NEAR_Z then
+		return
+	end
+	
+	local invW = 1 / clip.w
+	
+	local x = clip.x * invW
+	local y = clip.y * invW
+	
+	return self.halfWidth + x, self.halfHeight - y
+end
+
+function Renderer:drawFilledTri3D(polygon)
+	
+	local x1, y1 = project(self, polygon[1])
+	local x2, y2 = project(self, polygon[2])
+	local x3, y3 = project(self, polygon[3])
+	
+	if not x1 or not x2 or not x3 then
+		return
+	end
+	
+	self:drawFilledTriangle(x1, y1, x2, y2, x3, y3)
 end
 
 function Renderer:getEditableImage() : EditableImage
