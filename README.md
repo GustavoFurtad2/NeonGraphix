@@ -7,3 +7,4 @@ NeonGraphix is ​​a graphics library for Roblox.
 ## Features: 
 
   2D primitives: pixels, rectangles, lines, triangles, circles
+  3D: basic 3D graphics renderer
